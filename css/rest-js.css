@@ -24,3 +24,8 @@
 #data .btn {
 	vertical-align: top;
 }
+
+label {
+	display: inline;
+	vertical-align: middle;
+}

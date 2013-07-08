@@ -7,32 +7,68 @@ function send()
 
 	$('input[type=hidden]').remove();
 
-	$('input.input-name').each(function(i, input) { 
-		$("#data").append(
-			'<input type="hidden" name="' + $(input).val() + '" value="' + $('#' + input.parentNode.id + ' input.input-value').val() + '" />'
-		);
-	});
+	if($("#ajax_crossdomain").is(':checked')) {
+		$('input.input-name').each(function(i, input) { 
+			$("#data").append(
+				'<input type="hidden" name="' + $(input).val() + '" value="' + $('#' + input.parentNode.id + ' input.input-value').val() + '" />'
+			);
+		});
 
-	$.ajax({
-		url: $("#link").val() + $("#entry").val(),
-		cache: false,
-		data: $("#data").serialize(),
-		type: $("#method").val(),
-		success: function(data) {
-			$(".btn-send").button('reset');
-			$("#result").addClass('alert-success');
-			$("#result").html(JSON.stringify(data, undefined, 2));
-		},
-		error: function(data) {
-			$("#result").addClass('alert-error');
-			$(".btn-send").button('reset');
-			if(typeof(data) == 'object') {
+		$.ajax({
+			url: $("#link").val() + $("#entry").val(),
+			cache: false,
+			data: $("#data").serialize(),
+			type: $("#method").val(),
+			success: function(data) {
+				$(".btn-send").button('reset');
+				$("#result").addClass('alert-success');
 				$("#result").html(JSON.stringify(data, undefined, 2));
-			} else {
-				$("#result").html(data);
+			},
+			error: function(data) {
+				$("#result").addClass('alert-error');
+				$(".btn-send").button('reset');
+
+				try {
+					var json_data = JSON.parse(data.responseText);
+					$("#result").html(JSON.stringify(json_data, undefined, 2));
+				} catch(e) {
+					$("#result").html(data.responseText);
+				}
 			}
-		}
-	});
+		});
+	} else {
+		var data = {};
+		data['url'] = $("#link").val() + $("#entry").val();
+		data['method'] = $("#method").val();
+		$('input.input-name').each(function(i, input) { 
+			data[$(input).val()] = $('#' + input.parentNode.id + ' input.input-value').val();
+		});
+
+		console.log(data);
+
+		$.ajax({
+			url: 'rest_client.php',
+			cache: false,
+			data: data,
+			type: 'POST',
+			success: function(data) {
+				$(".btn-send").button('reset');
+				$("#result").addClass('alert-success');
+				$("#result").html(JSON.stringify(data, undefined, 2));
+			},
+			error: function(data) {
+				$("#result").addClass('alert-error');
+				$(".btn-send").button('reset');
+
+				try {
+					var json_data = JSON.parse(data.responseText);
+					$("#result").html(JSON.stringify(json_data, undefined, 2));
+				} catch(e) {
+					$("#result").html(data.responseText);
+				}
+			}
+		});
+	}
 }
 
 function add_param()
