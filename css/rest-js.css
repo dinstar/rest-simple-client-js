@@ -38,3 +38,8 @@ label {
 .toolbar a:first-child {
 	margin-left: 10px;
 }
+
+.row-fluid textarea.span12 {
+	min-height: 300px;
+	font-family: monospace;
+}
