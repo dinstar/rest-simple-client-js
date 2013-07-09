@@ -29,3 +29,12 @@ label {
 	display: inline;
 	vertical-align: middle;
 }
+
+.toolbar {
+	padding: 10px 0;
+	background-color: #eee;
+}
+
+.toolbar a:first-child {
+	margin-left: 10px;
+}

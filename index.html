@@ -25,7 +25,7 @@
 							<option value="delete">DELETE</option>
 						</select>
 					</div>
-					<input class="span12" id="link" type="text" placeholder="Lien avec slash final">
+					<input class="span12" id="link" type="text" placeholder="Lien avec slash final" value="../achieveL4/public/">
 					<input class="span12" id="entry" type="text" placeholder="Point d'entr&eacute;e">
 					<button class="btn btn-primary btn-send" role="button" onclick="send()" data-loading-text="Loading...">Envoyer</button>
 				</div>
@@ -33,16 +33,50 @@
 					<div id="first-param">
 						<input type="text" class="input-name" placeholder="Param&egrave;tre">
 						<input type="text" class="input-value" placeholder="Valeur">
-					</div>
-					<a href="#" class="btn btn-primary btn-addparam" onclick="add_param()">Ajouter un param&egrave;tre</a>
-					<a href="#" class="btn btn-warning" onclick="reset()">Reset</a>
-					<input type="checkbox" id="ajax_crossdomain" checked> 
-					<label for="ajax_crossdomain">Direct en AJAX ?</label>
+					</div>	
 				</form>
 			</div>
+
+			<div class="row-fluid toolbar">
+				<a href="#" class="btn btn-primary btn-addparam" onclick="add_param()">Ajouter un param&egrave;tre</a>
+				<a href="#" class="btn btn-warning" onclick="reset()">Reset</a>
+				<a href="#modalAuthBasic" class="btn btn-primary" data-toggle="modal">Auth basic</a>
+				<input type="checkbox" id="ajax_crossdomain" checked> 
+				<label for="ajax_crossdomain">Direct en AJAX ?</label>
+			</div>
+
 			<div class="row-fluid" style="margin-top: 20px">
 				<h4>R&eacute;sultat de la requ&ecirc;te</h4>
 				<pre class="prettyprint" id="result">/* Resultat de la requ&ecirc;te */</pre>
+			</div>
+		</div>
+
+		<div id="modalAuthBasic" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>HTTP Auth Basic</h3>
+			</div>
+			<div class="modal-body">
+				<p>
+					<form id="authBasic" class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="username">Utilisateur</label>
+							<div class="controls">
+								<input type="text" id="username" name="username" placeholder="Utilisateur">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="password">Mot de passe</label>
+							<div class="controls">
+								<input type="password" id="password" name="password" placeholder="Mot de passe">
+							</div>
+						</div>
+					</form>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
+				<a href="#" class="btn btn-primary">Sauvegarder</a>
 			</div>
 		</div>
 	</body>

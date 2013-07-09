@@ -40,12 +40,12 @@ function send()
 		var data = {};
 		data['url'] = $("#link").val() + $("#entry").val();
 		data['method'] = $("#method").val();
+		if($("#username").val()) data['auth_user'] = $("#username").val();
+		if($("#password").val()) data['auth_password'] = $("#password").val();
 		$('input.input-name').each(function(i, input) { 
 			data[$(input).val()] = $('#' + input.parentNode.id + ' input.input-value').val();
 		});
-
-		console.log(data);
-
+		
 		$.ajax({
 			url: 'rest_client.php',
 			cache: false,
@@ -74,7 +74,7 @@ function send()
 function add_param()
 {
 	var id = Math.round(new Date().getTime() / 1000);
-	$(".btn-addparam").before(
+	$("#data").append(
 		'<div id=' + id + '>' +
 			'<input type="text" class="input-name" placeholder="Param&egrave;tre"> ' +
 			'<input type="text" class="input-value" placeholder="Valeur"> ' +
@@ -92,10 +92,6 @@ function reset() {
 		'<div id="first-param">' +
 			'<input type="text" class="input-name" placeholder="Param&egrave;tre"> ' +
 			'<input type="text" class="input-value" placeholder="Valeur"> ' +
-		'</div>' + 
-		'<a href="#" class="btn btn-primary btn-addparam" onclick="add_param()">Ajouter un param&egrave;tre</a> ' +
-		'<a href="#" class="btn btn-warning" onclick="reset()">Reset</a> ' +
-		'<input type="checkbox" id="ajax_crossdomain" checked> ' +
-		'<label for="ajax_crossdomain">Direct en AJAX ?</label> '
+		'</div>'
 	);
 }
