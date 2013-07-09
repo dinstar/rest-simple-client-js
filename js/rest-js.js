@@ -94,6 +94,8 @@ function reset() {
 			'<input type="text" class="input-value" placeholder="Valeur"> ' +
 		'</div>' + 
 		'<a href="#" class="btn btn-primary btn-addparam" onclick="add_param()">Ajouter un param&egrave;tre</a> ' +
-		'<a href="#" class="btn btn-warning" onclick="reset()">Reset</a>'
+		'<a href="#" class="btn btn-warning" onclick="reset()">Reset</a> ' +
+		'<input type="checkbox" id="ajax_crossdomain" checked> ' +
+		'<label for="ajax_crossdomain">Direct en AJAX ?</label> '
 	);
 }
